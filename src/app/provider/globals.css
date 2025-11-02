@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: var(--inter-font);
+}
+
+body {
+  font-family: var(--font-inter), sans-serif;
+  @apply antialiased bg-gray-50;
+}
+
+/* Sidebar styles */
+.sidebar {
+  @apply fixed inset-y-0 left-0 w-64 bg-white shadow-sm transition-all duration-300 z-40;
+}
+
+/* Main content area */
+.main-content {
+  @apply md:ml-64 w-full p-4 md:p-8 transition-all duration-300;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    @apply -translate-x-full;
+  }
+  .sidebar-open .sidebar {
+    @apply translate-x-0;
+  }
+}

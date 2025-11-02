@@ -1,0 +1,170 @@
+TOP LEVEL FILES:
+total 715
+drwxr-xr-x 1 User 197121      0 Aug 27 23:33 ./
+drwxr-xr-x 1 User 197121      0 Aug 26 19:27 ../
+-rwxr-xr-x 1 User 197121   2721 Aug 26 01:07 .env.local*
+drwxr-xr-x 1 User 197121      0 Aug 25 23:02 .firebase/
+-rw-r--r-- 1 User 197121     56 Aug 26 19:31 .firebaserc
+drwxr-xr-x 1 User 197121      0 Aug  6 20:28 .git/
+-rw-r--r-- 1 User 197121    505 Aug 10 02:53 .gitignore
+drwxr-xr-x 1 User 197121      0 Aug 27 23:19 .next/
+-rw-r--r-- 1 User 197121      0 Aug 23 21:41 11
+-rw-r--r-- 1 User 197121      0 Aug 23 21:41 12
+-rw-r--r-- 1 User 197121      0 Aug 23 21:41 9
+-rw-r--r-- 1 User 197121   1450 Aug  2 14:56 README.md
+-rwxr-xr-x 1 User 197121    570 Aug 27 21:28 createBooking.sh*
+-rw-r--r-- 1 User 197121    393 Aug  2 14:56 eslint.config.mjs
+-rw-r--r-- 1 User 197121   1177 Aug 11 12:59 fill_forms.sh
+-rw-r--r-- 1 User 197121  13007 Aug 26 00:08 fill_pdf.py
+-rw-r--r-- 1 User 197121   1728 Aug 19 21:53 fill_safaricom_forms.py
+-rw-r--r-- 1 User 197121    640 Aug 26 19:31 firebase.json
+-rw-r--r-- 1 User 197121   1823 Aug  8 03:26 firestore-debug.log
+-rw-r--r-- 1 User 197121    280 Aug 27 21:51 firestore.indexes.json
+-rw-r--r-- 1 User 197121    754 Aug  8 01:52 firestore.rules
+-rw-r--r-- 1 User 197121   1281 Aug 11 13:16 form_values.json
+drwxr-xr-x 1 User 197121      0 Aug 25 21:09 functions/
+-rwxr-xr-x 1 User 197121    781 Aug  7 21:10 migrate-admin.sh*
+-rw-r--r-- 1 User 197121    328 Aug 26 17:59 next-env.d.ts
+-rw-r--r-- 1 User 197121    345 Aug 25 21:41 next.config.ts
+drwxr-xr-x 1 User 197121      0 Aug 26 17:59 node_modules/
+drwxr-xr-x 1 User 197121      0 Aug 25 22:58 out/
+-rw-r--r-- 1 User 197121 436461 Aug 26 17:59 package-lock.json
+-rw-r--r-- 1 User 197121   1540 Aug 26 00:56 package.json
+-rw-r--r-- 1 User 197121     69 Aug  4 23:00 postcss.config.js
+drwxr-xr-x 1 User 197121      0 Aug 26 19:31 public/
+-rw-r--r-- 1 User 197121    538 Aug 25 08:56 setRoles.js
+drwxr-xr-x 1 User 197121      0 Aug 25 10:11 src/
+-rw-r--r-- 1 User 197121   1846 Aug  8 16:26 structure.txt
+-rw-r--r-- 1 User 197121    366 Aug  6 17:32 tailwind.config.js
+-rw-r--r-- 1 User 197121    802 Aug  8 02:36 test-firestore.js
+-rw-r--r-- 1 User 197121     17 Aug 27 23:33 tibacare_inventory.txt
+-rw-r--r-- 1 User 197121    777 Aug  8 02:55 tsconfig.json
+
+package.json content:
+{
+  "name": "tibacare",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "deploy": "firebase deploy",
+    "build:functions": "npm --prefix functions run build"
+  },
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-icons": "^1.3.2",
+    "@radix-ui/react-popover": "^1.1.14",
+    "@radix-ui/react-select": "^2.2.5",
+    "@react-pdf/renderer": "^4.3.0",
+    "axios": "^1.11.0",
+    "canvg": "^4.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.2.1",
+    "firebase": "^12.1.0",
+    "firebase-admin": "^13.4.0",
+    "firebase-functions": "^4.5.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
+    "lucide-react": "^0.536.0",
+    "next": "^15.4.5",
+    "papaparse": "^5.5.3",
+    "react": "^19.1.0",
+    "react-day-picker": "^9.8.1",
+    "react-dom": "^19.1.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "^5.5.0",
+    "recharts": "^3.1.2",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/firebase": "^2.4.32",
+    "@types/node": "^20.19.9",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.5",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  }
+}
+
+SRC FILES (first 3 levels):
+src/app/admin/layout.tsx
+src/app/admin/page.tsx
+src/app/book/page.tsx
+src/app/components/AppointmentList.tsx
+src/app/components/Footer.tsx
+src/app/components/HeroSection.tsx
+src/app/components/LayoutWrapper.tsx
+src/app/components/Navbar.tsx
+src/app/components/ServicesSection.tsx
+src/app/consultations/page.tsx
+src/app/contact/page.jsx
+src/app/dashboard/page.tsx
+src/app/favicon.ico
+src/app/firebase-test/page.tsx
+src/app/globals.css
+src/app/imagingrequest/page.tsx
+src/app/labrequest/page.tsx
+src/app/layout.tsx
+src/app/login/page.tsx
+src/app/manage/layout.tsx
+src/app/manage/page.tsx
+src/app/my-consultations/page.tsx
+src/app/page.tsx
+src/app/patient-dashboard/page.tsx
+src/app/payment/page.tsx
+src/app/preconsultation/page.tsx
+src/app/prescription/page.tsx
+src/app/provider/globals.css
+src/app/provider/layout.tsx
+src/app/provider/page.tsx
+src/app/referral/page.tsx
+src/app/services/page.tsx
+src/app/sicknote/page.tsx
+src/app/upload-preconsultation/page.tsx
+src/components/ChatContainer.tsx
+src/components/ChatMessages.tsx
+src/components/LogoutButton.tsx
+src/components/Sidebar.tsx
+src/components/ui/button.tsx
+src/components/ui/calendar.tsx
+src/components/ui/card.tsx
+src/components/ui/dialog.tsx
+src/components/ui/input.tsx
+src/components/ui/label.tsx
+src/components/ui/Messages.tsx
+src/components/ui/popover.tsx
+src/components/ui/select.tsx
+src/components/ui/textarea.tsx
+src/context/PatientContext.tsx
+src/firebase/firebase.ts
+src/firebase/FirebaseProvider.tsx
+src/firebase/index.ts
+src/layouts/AdminLayout.tsx
+src/lib/AuthContext.tsx
+src/lib/firebase.ts
+src/lib/FirebaseContext.tsx
+src/lib/firebaseService.ts
+src/lib/mpesa/mpesa.ts
+src/lib/mpesa/stkpush.ts
+src/lib/utils.ts
+src/pages/api/initiate-payment.ts
+src/pages/api/mpesa-callback.ts
+src/pages/api/mpesa-callbacks.ts
+src/pages/api/mpesa.ts
+src/pages/api/sendWhatsapp.ts
+src/pages/api/sendWhatsappDocument.ts
+src/pages/pay.js
+src/utils/mpesa.ts
+src/utils/pay.ts

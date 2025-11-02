@@ -1,0 +1,65 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  firstName    String
+  lastName     String
+  phone        String?
+  role         String        @default("PATIENT")
+  dateOfBirth  DateTime?
+  gender       String?
+  address      String?
+  avatar       String?
+  firebaseUid  String?       @unique
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  patientPreConsultations  PreConsultation[] @relation("PatientPreConsultations")
+  providerPreConsultations PreConsultation[] @relation("ProviderPreConsultations")
+  uploadedFiles            PreConsultationFile[]
+}
+
+model PreConsultation {
+  id          String   @id @default(cuid())
+  patientId   String
+  providerId  String
+  status      String   @default("SUBMITTED")
+  symptoms    String?
+  medicalHistory String?
+  medications  String?
+  allergies    String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  scheduledAt DateTime?
+  
+  patient  User @relation("PatientPreConsultations", fields: [patientId], references: [id], onDelete: Cascade)
+  provider User @relation("ProviderPreConsultations", fields: [providerId], references: [id], onDelete: Cascade)
+  files    PreConsultationFile[]
+}
+
+model PreConsultationFile {
+  id           String   @id @default(cuid())
+  preConsultationId String
+  uploadedById String
+  filename     String
+  fileUrl      String
+  fileType     String
+  fileSize     Int
+  description  String?
+  uploadedAt   DateTime @default(now())
+  isDeleted    Boolean  @default(false)
+  
+  preConsultation PreConsultation @relation(fields: [preConsultationId], references: [id], onDelete: Cascade)
+  uploadedBy      User            @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
+}

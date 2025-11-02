@@ -1,0 +1,55 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { db } from '@/firebase';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+
+interface Preconsultation {
+  id: string;
+  fullName: string;
+  age: string;
+  symptoms: string;
+  allergies: string;
+  medicalHistory: string;
+  createdAt: any;
+}
+
+export default function AdminPage() {
+  const [preconsultations, setPreconsultations] = useState<Preconsultation[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchPreconsultations() {
+      const q = query(collection(db, 'preconsultations'), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      const data = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Preconsultation[];
+      setPreconsultations(data);
+      setLoading(false);
+    }
+    fetchPreconsultations();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+
+  return (
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-4">Pre-Consultations</h1>
+      {preconsultations.length === 0 && <p>No submissions yet.</p>}
+      <ul className="space-y-4">
+        {preconsultations.map((item) => (
+          <li key={item.id} className="border p-4 rounded shadow">
+            <p><strong>Name:</strong> {item.fullName}</p>
+            <p><strong>Age:</strong> {item.age}</p>
+            <p><strong>Symptoms:</strong> {item.symptoms}</p>
+            <p><strong>Allergies:</strong> {item.allergies || 'None'}</p>
+            <p><strong>Medical History:</strong> {item.medicalHistory || 'None'}</p>
+            <p><strong>Submitted at:</strong> {item.createdAt?.toDate().toLocaleString() || 'N/A'}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

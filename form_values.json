@@ -1,0 +1,35 @@
+{
+  "M-PESA_C2B_Form": {
+    "Company_Profile_Industry": "Healthcare",
+    "Physical_Address": "P.O Box 20624, Nairobi, 00200",
+    "Postal_Address": "P.O Box 20624, Nairobi, 00200",
+    "Telephone_No_1": "0705575068",
+    "Office_E-mail_Address": "humphreykiboi1@gmail.com",
+    "Type_of_Business": "Clinic",
+    "Trading_for_Years": "2",
+    "Proposed_Name_for_M-PESA_Account": "Tibacare",
+    "Name_of_Contact_Person": "Humphrey Chemos Kiboi",
+    "E-mail_Address": "humphreykiboi1@gmail.com",
+    "Telephone_Number": "0705575068",
+    "Name_of_Administrator": "Humphrey Chemos Kiboi",
+    "ID_Number": "32293146",
+    "Bank_Name": "Equity Bank",
+    "Branch": "Kayole",
+    "Account_Number": "0650179277963"
+  },
+  "UBO_Form": {
+    "Legal_Name_of_the_Customer": "Tibacare",
+    "Full_Name_of_Beneficial_Owner_natural_person": "Humphrey Chemos Kiboi",
+    "Identity_Card_Passport_Number": "32293146",
+    "Nationality": "Kenyan",
+    "Position": "Owner",
+    "Phone_number": "0705575068",
+    "Controlling_ownership_Interest": "100"
+  },
+  "Account_Opening_Form": {
+    "Name_of_Corporation_Organization": "Tibacare",
+    "Authorized_Signatory_Name": "Humphrey Chemos Kiboi",
+    "Authorized_Signatory_Sign": "electronically signed",
+    "Company_seal_stamp": "Tibacare"
+  }
+}
