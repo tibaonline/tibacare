@@ -1,13 +1,13 @@
 'use client';
 
 // Import each tool directly
-import Prescription from './prescription';
-import LabRequest from './lab-request';
-import ImagingRequest from './imaging-request';
-import Referral from './referral';
-import SickNote from './sick-note';
-import MedicalReport from './medical-report';
-import FaceSheet from './facesheet';
+import Prescription from './prescription/page';
+import LabRequest from './lab-request/page';
+import ImagingRequest from './imaging-request/page';
+import Referral from './referral/page';
+import SickNote from './sick-note/page';
+import MedicalReport from './medical-report/page';
+import FaceSheet from './facesheet/page';
 
 // Export them as named exports
 export {
