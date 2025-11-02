@@ -1,10 +1,11 @@
 'use client';
-import { useState } from "react";
+
+import { useState, Suspense } from "react";
 import { auth } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LoginPage() {
+function LoginContent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,28 +23,25 @@ export default function LoginPage() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Determine role
       let role: "admin" | "provider" | "patient" = "patient";
       if (user.email === ADMIN_EMAIL) {
         role = "admin";
       } else {
-        role = "provider"; // default provider
+        role = "provider";
       }
 
-      // 🔑 New Logic: Admin can log in anywhere (no forced redirect)
       if (role === "admin") {
-        router.push(redirect); 
+        router.push(redirect);
       } else if (role === "provider") {
         if (redirect.includes("/admin")) {
           alert("❌ Access Denied: Providers cannot access Admin Panel");
-          router.push("/provider"); 
+          router.push("/provider");
         } else {
           router.push(redirect.includes("/provider") ? redirect : "/provider");
         }
       } else {
         router.push("/patient");
       }
-
     } catch (err) {
       console.error(err);
       setError("Invalid email or password");
@@ -76,5 +74,13 @@ export default function LoginPage() {
         </button>
       </form>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="text-center mt-20">Loading login...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }
