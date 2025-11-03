@@ -1,17 +1,22 @@
 'use client';
 
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import { auth } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 
-function LoginForm() {
+// 🚨 Prevent Next.js from trying to prerender this page at build time
+export const dynamic = "force-dynamic";
+
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  // ✅ This hook now only runs client-side
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/";
+  const redirect = searchParams?.get("redirect") || "/";
 
   const ADMIN_EMAIL = "humphreykiboi1@gmail.com";
 
@@ -75,13 +80,5 @@ function LoginForm() {
         </button>
       </form>
     </div>
-  );
-}
-
-export default function LoginPage() {
-  return (
-    <Suspense fallback={<div className="p-6 text-center">Loading...</div>}>
-      <LoginForm />
-    </Suspense>
   );
 }
