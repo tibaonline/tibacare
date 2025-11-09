@@ -1,43 +1,52 @@
 'use client';
-
 import { useState } from "react";
-import { auth } from "@/lib/firebase";
+import { auth } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect") || "/";
 
   const ADMIN_EMAIL = "humphreykiboi1@gmail.com";
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    setIsLoading(true);
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      // Determine role
       let role: "admin" | "provider" | "patient" = "patient";
-      
       if (user.email === ADMIN_EMAIL) {
         role = "admin";
-        router.push("/admin"); 
       } else {
-        role = "provider";
-        router.push("/provider");
+        role = "provider"; // default provider
       }
 
-    } catch (err: any) {
+      // 🔑 New Logic: Admin can log in anywhere (no forced redirect)
+      if (role === "admin") {
+        router.push(redirect); 
+      } else if (role === "provider") {
+        if (redirect.includes("/admin")) {
+          alert("❌ Access Denied: Providers cannot access Admin Panel");
+          router.push("/provider"); 
+        } else {
+          router.push(redirect.includes("/provider") ? redirect : "/provider");
+        }
+      } else {
+        router.push("/patient");
+      }
+
+    } catch (err) {
       console.error(err);
       setError("Invalid email or password");
-    } finally {
-      setIsLoading(false);
     }
   }
 
@@ -52,7 +61,6 @@ export default function LoginPage() {
           onChange={e => setEmail(e.target.value)}
           required
           className="border p-2 rounded"
-          disabled={isLoading}
         />
         <input
           type="password"
@@ -61,15 +69,10 @@ export default function LoginPage() {
           onChange={e => setPassword(e.target.value)}
           required
           className="border p-2 rounded"
-          disabled={isLoading}
         />
         {error && <p className="text-red-500">{error}</p>}
-        <button 
-          type="submit" 
-          className="bg-blue-600 text-white p-2 rounded disabled:bg-blue-400"
-          disabled={isLoading}
-        >
-          {isLoading ? "Logging in..." : "Login"}
+        <button type="submit" className="bg-blue-600 text-white p-2 rounded">
+          Login
         </button>
       </form>
     </div>
