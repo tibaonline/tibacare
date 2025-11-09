@@ -1858,6 +1858,7 @@ function ProviderDashboard() {
             onClose={() => setActiveTool(null)}
           />
         </div>
+      </div>
     );
   };
 
