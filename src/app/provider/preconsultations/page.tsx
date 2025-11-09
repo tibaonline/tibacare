@@ -712,11 +712,11 @@ function ProviderDashboard() {
   useEffect(() => {
     resizeHpi();
     resizePlan();
-  }, [clerkingData.hpi, clerkingData.plan, resizeHpi, resizePlan]);
+  }, [clerkingData?.hpi, clerkingData?.plan, resizeHpi, resizePlan]);
 
   /* Auto-calculate BMI when weight or height changes */
   useEffect(() => {
-    if (clerkingData.vitals?.weight || clerkingData.vitals?.height) {
+    if (clerkingData?.vitals?.weight || clerkingData?.vitals?.height) {
       const weight = clerkingData.vitals.weight || '';
       const height = clerkingData.vitals.height || '';
       const bmi = calculateBMI(weight, height);
@@ -731,7 +731,7 @@ function ProviderDashboard() {
         }));
       }
     }
-  }, [clerkingData.vitals?.weight, clerkingData.vitals?.height]);
+  }, [clerkingData?.vitals?.weight, clerkingData?.vitals?.height]);
 
   /* Audit logger */
   const logAudit = async (type: string, details: object) => {
@@ -1186,7 +1186,7 @@ function ProviderDashboard() {
 
   /* Mental Health Assessment Form */
   const MentalHealthAssessmentForm = () => {
-    const mentalState = clerkingData.mentalStateExam || {};
+    const mentalState = clerkingData?.mentalStateExam || {};
 
     const updateMentalState = (field: keyof MentalHealthAssessment, value: string) => {
       setClerkingData(prev => ({
@@ -1211,7 +1211,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">Presenting Complaint</div>
               <textarea 
                 rows={2}
-                value={clerkingData.presentingComplaint || ''} 
+                value={clerkingData?.presentingComplaint || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, presentingComplaint: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Main reason for consultation..." 
@@ -1222,7 +1222,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">History of Presenting Complaint</div>
               <textarea 
                 rows={3}
-                value={clerkingData.historyPresentingComplaint || ''} 
+                value={clerkingData?.historyPresentingComplaint || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, historyPresentingComplaint: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Onset, duration, progression, triggers..." 
@@ -1239,7 +1239,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">Past Psychiatric History</div>
               <textarea 
                 rows={3}
-                value={clerkingData.psychiatricHistory || ''} 
+                value={clerkingData?.psychiatricHistory || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, psychiatricHistory: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Previous diagnoses, treatments, hospitalizations..." 
@@ -1250,7 +1250,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">Family Psychiatric History</div>
               <textarea 
                 rows={3}
-                value={clerkingData.familyPsychiatricHistory || ''} 
+                value={clerkingData?.familyPsychiatricHistory || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, familyPsychiatricHistory: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Mental health conditions in family..." 
@@ -1267,7 +1267,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">Personal History</div>
               <textarea 
                 rows={3}
-                value={clerkingData.personalHistory || ''} 
+                value={clerkingData?.personalHistory || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, personalHistory: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Development, education, relationships, occupation..." 
@@ -1278,7 +1278,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">Premorbid Personality</div>
               <textarea 
                 rows={3}
-                value={clerkingData.premorbidPersonality || ''} 
+                value={clerkingData?.premorbidPersonality || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, premorbidPersonality: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Personality traits before current issues..." 
@@ -1508,7 +1508,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">Diagnosis/Formulation</div>
               <textarea 
                 rows={3}
-                value={clerkingData.impression || ''} 
+                value={clerkingData?.impression || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, impression: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Diagnostic impression and formulation..." 
@@ -1519,7 +1519,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">Management Plan</div>
               <textarea 
                 rows={4}
-                value={clerkingData.managementPlan || ''} 
+                value={clerkingData?.managementPlan || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, managementPlan: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Treatment plan, therapy, medications, follow-up..." 
@@ -1530,7 +1530,7 @@ function ProviderDashboard() {
               <div className="font-semibold text-sm mb-1">Safety Plan</div>
               <textarea 
                 rows={3}
-                value={clerkingData.safetyPlan || ''} 
+                value={clerkingData?.safetyPlan || ''} 
                 onChange={(e) => setClerkingData(prev => ({ ...prev, safetyPlan: e.target.value }))} 
                 className="w-full p-3 border rounded" 
                 placeholder="Crisis plan, emergency contacts, safety measures..." 
@@ -1558,7 +1558,7 @@ function ProviderDashboard() {
         <textarea 
           ref={hpiRef}
           rows={3} 
-          value={clerkingData.hpi || ''} 
+          value={clerkingData?.hpi || ''} 
           onChange={(e) => {
             setClerkingData((c) => ({ ...c, hpi: e.target.value }));
             resizeHpi();
@@ -1570,22 +1570,22 @@ function ProviderDashboard() {
 
       <label>
         <div className="font-semibold text-sm mb-1">General Examination</div>
-        <textarea rows={2} value={clerkingData.generalExam || ''} onChange={(e) => setClerkingData((c) => ({ ...c, generalExam: e.target.value }))} className="w-full p-3 border rounded" placeholder="General appearance..." />
+        <textarea rows={2} value={clerkingData?.generalExam || ''} onChange={(e) => setClerkingData((c) => ({ ...c, generalExam: e.target.value }))} className="w-full p-3 border rounded" placeholder="General appearance..." />
       </label>
 
       <label>
         <div className="font-semibold text-sm mb-1">Systemic Examination</div>
-        <textarea rows={3} value={clerkingData.systemExam || ''} onChange={(e) => setClerkingData((c) => ({ ...c, systemExam: e.target.value }))} className="w-full p-3 border rounded" placeholder="Cardiovascular, respiratory, etc." />
+        <textarea rows={3} value={clerkingData?.systemExam || ''} onChange={(e) => setClerkingData((c) => ({ ...c, systemExam: e.target.value }))} className="w-full p-3 border rounded" placeholder="Cardiovascular, respiratory, etc." />
       </label>
 
       <label>
         <div className="font-semibold text-sm mb-1">Investigations</div>
-        <textarea ref={investigationsRef} rows={2} value={clerkingData.investigations || ''} onChange={(e) => setClerkingData((c) => ({ ...c, investigations: e.target.value }))} className="w-full p-3 border rounded" placeholder="Lab tests, imaging..." />
+        <textarea ref={investigationsRef} rows={2} value={clerkingData?.investigations || ''} onChange={(e) => setClerkingData((c) => ({ ...c, investigations: e.target.value }))} className="w-full p-3 border rounded" placeholder="Lab tests, imaging..." />
       </label>
 
       <label>
         <div className="font-semibold text-sm mb-1">Impression / Diagnosis</div>
-        <textarea rows={2} value={clerkingData.impression || ''} onChange={(e) => setClerkingData((c) => ({ ...c, impression: e.target.value }))} className="w-full p-3 border rounded" placeholder="Clinical impression" />
+        <textarea rows={2} value={clerkingData?.impression || ''} onChange={(e) => setClerkingData((c) => ({ ...c, impression: e.target.value }))} className="w-full p-3 border rounded" placeholder="Clinical impression" />
       </label>
 
       <label>
@@ -1601,7 +1601,7 @@ function ProviderDashboard() {
         <textarea 
           ref={planRef}
           rows={3} 
-          value={clerkingData.plan || ''} 
+          value={clerkingData?.plan || ''} 
           onChange={(e) => {
             setClerkingData((c) => ({ ...c, plan: e.target.value }));
             resizePlan();
@@ -1614,12 +1614,12 @@ function ProviderDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <label>
           <div className="font-semibold text-sm mb-1">Medications</div>
-          <textarea rows={2} value={clerkingData.medications || ''} onChange={(e) => setClerkingData((c) => ({ ...c, medications: e.target.value }))} className="w-full p-3 border rounded" placeholder="Current medications..." />
+          <textarea rows={2} value={clerkingData?.medications || ''} onChange={(e) => setClerkingData((c) => ({ ...c, medications: e.target.value }))} className="w-full p-3 border rounded" placeholder="Current medications..." />
         </label>
         
         <label>
           <div className="font-semibold text-sm mb-1">Allergies</div>
-          <textarea rows={2} value={clerkingData.allergies || ''} onChange={(e) => setClerkingData((c) => ({ ...c, allergies: e.target.value }))} className="w-full p-3 border rounded" placeholder="Known allergies..." />
+          <textarea rows={2} value={clerkingData?.allergies || ''} onChange={(e) => setClerkingData((c) => ({ ...c, allergies: e.target.value }))} className="w-full p-3 border rounded" placeholder="Known allergies..." />
         </label>
       </div>
     </div>
@@ -1668,7 +1668,7 @@ function ProviderDashboard() {
       yPosition += 10;
       
       // Vitals for both types
-      if (clerkingData.vitals && Object.keys(clerkingData.vitals).length > 0) {
+      if (clerkingData?.vitals && Object.keys(clerkingData.vitals).length > 0) {
         doc.setFillColor(240, 240, 240);
         doc.rect(14, yPosition - 5, 182, 8, 'F');
         doc.text('VITAL SIGNS', 20, yPosition);
@@ -1696,7 +1696,7 @@ function ProviderDashboard() {
       // Mental Health Specific Content
       if (isMentalHealthPatient) {
         // Presenting Complaint
-        if (clerkingData.presentingComplaint) {
+        if (clerkingData?.presentingComplaint) {
           doc.setFillColor(240, 240, 240);
           doc.rect(14, yPosition - 5, 182, 8, 'F');
           doc.text('PRESENTING COMPLAINT', 20, yPosition);
@@ -1708,7 +1708,7 @@ function ProviderDashboard() {
         }
         
         // Mental State Examination
-        if (clerkingData.mentalStateExam) {
+        if (clerkingData?.mentalStateExam) {
           const mse = clerkingData.mentalStateExam;
           doc.setFillColor(240, 240, 240);
           doc.rect(14, yPosition - 5, 182, 8, 'F');
@@ -1736,10 +1736,10 @@ function ProviderDashboard() {
         }
         
         // Risk Assessment
-        if (clerkingData.mentalStateExam?.riskAssessment || 
-            clerkingData.mentalStateExam?.suicideRisk ||
-            clerkingData.mentalStateExam?.selfHarmRisk ||
-            clerkingData.mentalStateExam?.violenceRisk) {
+        if (clerkingData?.mentalStateExam?.riskAssessment || 
+            clerkingData?.mentalStateExam?.suicideRisk ||
+            clerkingData?.mentalStateExam?.selfHarmRisk ||
+            clerkingData?.mentalStateExam?.violenceRisk) {
           
           doc.setFillColor(240, 240, 240);
           doc.rect(14, yPosition - 5, 182, 8, 'F');
@@ -1770,22 +1770,22 @@ function ProviderDashboard() {
       
       // Common sections for both mental health and general medical
       const sections = isMentalHealthPatient ? [
-        { title: 'PSYCHIATRIC HISTORY', content: clerkingData.psychiatricHistory },
-        { title: 'FAMILY PSYCHIATRIC HISTORY', content: clerkingData.familyPsychiatricHistory },
-        { title: 'PERSONAL HISTORY', content: clerkingData.personalHistory },
-        { title: 'MANAGEMENT PLAN', content: clerkingData.managementPlan },
-        { title: 'SAFETY PLAN', content: clerkingData.safetyPlan },
-        { title: 'MEDICATIONS', content: clerkingData.medications },
-        { title: 'ALLERGIES', content: clerkingData.allergies }
+        { title: 'PSYCHIATRIC HISTORY', content: clerkingData?.psychiatricHistory },
+        { title: 'FAMILY PSYCHIATRIC HISTORY', content: clerkingData?.familyPsychiatricHistory },
+        { title: 'PERSONAL HISTORY', content: clerkingData?.personalHistory },
+        { title: 'MANAGEMENT PLAN', content: clerkingData?.managementPlan },
+        { title: 'SAFETY PLAN', content: clerkingData?.safetyPlan },
+        { title: 'MEDICATIONS', content: clerkingData?.medications },
+        { title: 'ALLERGIES', content: clerkingData?.allergies }
       ] : [
-        { title: 'HISTORY OF PRESENTING ILLNESS', content: clerkingData.hpi },
-        { title: 'GENERAL EXAMINATION', content: clerkingData.generalExam },
-        { title: 'SYSTEMIC EXAMINATION', content: clerkingData.systemExam },
-        { title: 'INVESTIGATIONS', content: clerkingData.investigations },
-        { title: 'IMPRESSION/DIAGNOSIS', content: clerkingData.impression },
-        { title: 'TREATMENT PLAN', content: clerkingData.plan },
-        { title: 'MEDICATIONS', content: clerkingData.medications },
-        { title: 'ALLERGIES', content: clerkingData.allergies }
+        { title: 'HISTORY OF PRESENTING ILLNESS', content: clerkingData?.hpi },
+        { title: 'GENERAL EXAMINATION', content: clerkingData?.generalExam },
+        { title: 'SYSTEMIC EXAMINATION', content: clerkingData?.systemExam },
+        { title: 'INVESTIGATIONS', content: clerkingData?.investigations },
+        { title: 'IMPRESSION/DIAGNOSIS', content: clerkingData?.impression },
+        { title: 'TREATMENT PLAN', content: clerkingData?.plan },
+        { title: 'MEDICATIONS', content: clerkingData?.medications },
+        { title: 'ALLERGIES', content: clerkingData?.allergies }
       ];
       
       for (const section of sections) {
@@ -1858,7 +1858,6 @@ function ProviderDashboard() {
             onClose={() => setActiveTool(null)}
           />
         </div>
-      </div>
     );
   };
 
@@ -2492,7 +2491,7 @@ function ProviderDashboard() {
                         <input
                           type="text"
                           className="w-full p-2 border rounded"
-                          value={(clerkingData.vitals as any)?.[k] || ''}
+                          value={(clerkingData?.vitals as any)?.[k] || ''}
                           onChange={(e) => setClerkingData((prev) => ({ ...prev, vitals: { ...(prev.vitals || {}), [k]: e.target.value } }))}
                         />
                       </div>
