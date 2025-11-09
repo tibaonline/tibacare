@@ -43,3 +43,5 @@ next-env.d.ts
 payments.json
 
 /src/generated/prisma
+
+.vercel

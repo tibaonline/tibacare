@@ -1,16 +1,21 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth } from "@/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [redirect, setRedirect] = useState("/");
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/";
+
+  // Get search params on client side only
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    setRedirect(urlParams.get("redirect") || "/");
+  }, []);
 
   const ADMIN_EMAIL = "humphreykiboi1@gmail.com";
 
@@ -27,10 +32,9 @@ export default function LoginPage() {
       if (user.email === ADMIN_EMAIL) {
         role = "admin";
       } else {
-        role = "provider"; // default provider
+        role = "provider";
       }
 
-      // 🔑 New Logic: Admin can log in anywhere (no forced redirect)
       if (role === "admin") {
         router.push(redirect); 
       } else if (role === "provider") {

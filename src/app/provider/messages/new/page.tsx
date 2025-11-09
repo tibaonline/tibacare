@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { db, auth } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function NewMessagePage() {
-  const searchParams = useSearchParams();
   const router = useRouter();
 
   const [message, setMessage] = useState('');
@@ -14,9 +13,11 @@ export default function NewMessagePage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const recipient = searchParams.get('to') || '';
+    // Get URL parameters on client side only
+    const urlParams = new URLSearchParams(window.location.search);
+    const recipient = urlParams.get('to') || '';
     setTo(recipient);
-  }, [searchParams]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

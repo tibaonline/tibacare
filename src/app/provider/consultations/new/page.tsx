@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { db } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import toast, { Toaster } from 'react-hot-toast';
 
-export default function NewConsultationPage() {
+// Wrap the main logic in a separate component that uses useSearchParams
+function ConsultationForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -176,5 +177,18 @@ export default function NewConsultationPage() {
         </button>
       </form>
     </div>
+  );
+}
+
+// Main component with Suspense boundary
+export default function NewConsultationPage() {
+  return (
+    <Suspense fallback={
+      <div className="max-w-md mx-auto p-6 bg-white rounded shadow mt-10">
+        <div className="text-center">Loading consultation form...</div>
+      </div>
+    }>
+      <ConsultationForm />
+    </Suspense>
   );
 }
